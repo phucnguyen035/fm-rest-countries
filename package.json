@@ -21,6 +21,7 @@
     "@playwright/test": "^1.21.0-alpha-apr-8-2022",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
+    "@tailwindcss/forms": "^0.5.0",
     "@types/cookie": "^0.4.1",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
