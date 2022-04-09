@@ -6,7 +6,7 @@ test.describe('Home page', () => {
   });
 
   test('has dark mode toggle button working', async ({ page }) => {
-    const toggleBtn = page.locator(`button:has-text("Dark mode")`);
+    const toggleBtn = page.locator(`button[aria-labelledby="dark-mode"]`);
     const app = page.locator('#app');
 
     await expect(toggleBtn).toBeVisible();

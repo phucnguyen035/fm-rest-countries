@@ -11,8 +11,8 @@
 
 <button
   type="button"
+  aria-labelledby="dark-mode"
   class="flex items-center p-2 focus:outline"
-  aria-label="Toggle dark mode"
   on:click={onClick}
 >
   {#if isDarkTheme}
@@ -28,7 +28,7 @@
       <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
     </svg>
   {/if}
-  <span class="ml-2">
+  <span id="dark-mode" class="ml-2">
     {#if isDarkTheme}
       Light mode
     {:else}
