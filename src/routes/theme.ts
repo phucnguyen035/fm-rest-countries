@@ -7,6 +7,7 @@ export const put: RequestHandler = async ({ request }) => {
   const cookies = cookie.serialize('theme', theme, {
     httpOnly: true,
     secure: import.meta.env.PROD,
+    sameSite: 'strict',
   });
 
   return {
