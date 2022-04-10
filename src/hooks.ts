@@ -5,5 +5,5 @@ export const getSession: GetSession = ({ request }) => {
   const cookie = request.headers.get('cookie') ?? '';
   const { theme } = parse(cookie);
 
-  return { theme: `testing 123 ${theme}` as App.Session['theme'] };
+  return { theme: (theme as App.Session['theme']) || 'dark' };
 };
