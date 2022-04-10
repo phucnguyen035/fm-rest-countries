@@ -3,7 +3,7 @@ import { parse } from 'cookie';
 
 export const getSession: GetSession = ({ request }) => {
   const cookie = request.headers.get('cookie') ?? '';
-  const { theme = 'test' } = parse(cookie);
+  // const { theme = 'test' } = parse(cookie);
 
-  return { theme: theme as App.Session['theme'] };
+  return { theme: JSON.stringify(parse(cookie)) as App.Session['theme'] };
 };
