@@ -20,13 +20,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 };
 
 export const getSession: GetSession = ({ request }) => {
-  const test = {};
-  request.headers.forEach((value, key) => {
-    test[key] = value;
-  });
-
   const cookie = request.headers.get('cookie') ?? '';
-  const { theme = 'test' } = parse(cookie);
+  const { theme = 'dark' } = parse(cookie);
 
-  return { theme: JSON.stringify(test) as App.Session['theme'] };
+  return { theme: theme as App.Session['theme'] };
 };
