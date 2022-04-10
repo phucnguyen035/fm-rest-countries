@@ -21,7 +21,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 export const getSession: GetSession = ({ request }) => {
   const cookie = request.headers.get('cookie') ?? '';
-  const { theme = 'dark' } = parse(cookie);
+  const { theme } = parse(cookie);
 
-  return { theme: theme as App.Session['theme'] };
+  return { theme: (theme as App.Session['theme']) || 'dark' };
 };
