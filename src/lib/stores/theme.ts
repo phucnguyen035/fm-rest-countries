@@ -5,6 +5,7 @@ import { derived, type Readable } from 'svelte/store';
 export type Theme = App.Session['theme'];
 
 export const theme: Readable<Theme> = derived(session, ($session, set) => {
+  console.log('$session', $session);
   if ($session.theme) {
     set($session.theme);
   } else if (browser) {

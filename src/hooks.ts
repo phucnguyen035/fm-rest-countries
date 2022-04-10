@@ -1,23 +1,5 @@
-import type { GetSession, Handle } from '@sveltejs/kit';
-import { parse, serialize } from 'cookie';
-
-export const handle: Handle = async ({ event, resolve }) => {
-  const response = await resolve(event);
-
-  const cookies = parse(event.request.headers.get('cookie') || '');
-
-  if (!cookies.theme) {
-    const themeCookie = serialize('theme', 'dark', {
-      httpOnly: true,
-      secure: import.meta.env.PROD,
-      sameSite: 'strict',
-    });
-
-    response.headers.append('set-cookie', themeCookie);
-  }
-
-  return response;
-};
+import type { GetSession } from '@sveltejs/kit';
+import { parse } from 'cookie';
 
 export const getSession: GetSession = ({ request }) => {
   const cookie = request.headers.get('cookie') ?? '';
