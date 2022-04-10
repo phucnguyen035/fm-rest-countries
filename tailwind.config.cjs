@@ -33,7 +33,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+        sans: ['Nunito Sans', ...defaultTheme.fontFamily.sans],
       },
     },
   },
