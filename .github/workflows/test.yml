@@ -12,11 +12,10 @@ jobs:
     if: github.event.deployment_status.state == 'success'
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16.13.0'
-          cache: 'yarn'
+      - name: Checking out repository
+        uses: actions/checkout@v3
+      - name: Setup Node.Js
+        uses: actions/setup-node@v3
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Install Playwright
