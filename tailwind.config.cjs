@@ -30,6 +30,13 @@ const config = {
         sans: ['Nunito Sans', ...defaultTheme.fontFamily.sans],
       },
     },
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1rem',
+        desktop: '4rem',
+      },
+    },
   },
 
   plugins: [require('@tailwindcss/forms')],
