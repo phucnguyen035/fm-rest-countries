@@ -10,3 +10,9 @@ declare namespace App {
   }
   // interface Stuff {}
 }
+
+declare namespace svelte.JSX {
+  interface HTMLProps<T> {
+    onintersecting?: () => void;
+  }
+}
