@@ -4,7 +4,7 @@
 </script>
 
 <div id="app" class={$theme}>
-  <div class="min-h-screen transition-colors dark:bg-blue-bg dark:text-white">
+  <div class="min-h-screen bg-background text-text transition-colors">
     <slot />
   </div>
 </div>

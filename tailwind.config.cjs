@@ -20,16 +20,10 @@ const config = {
       desktop: '1440px',
     },
     colors: {
-      blue: {
-        default: withOpacityValue('--blue'),
-        bg: withOpacityValue('--blue-dark'),
-        text: withOpacityValue('--blue-darker'),
-      },
-      gray: {
-        input: withOpacityValue('--gray'),
-        background: withOpacityValue('--gray-light'),
-      },
-      white: withOpacityValue('--white'),
+      elements: withOpacityValue('--elements'),
+      background: withOpacityValue('--background'),
+      text: withOpacityValue('--text'),
+      input: withOpacityValue('--input'),
     },
     extend: {
       fontFamily: {

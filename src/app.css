@@ -5,11 +5,15 @@
 
 @layer base {
   :root {
-    --blue: 209, 23%, 22%;
-    --blue-dark: 207, 26%, 17%;
-    --blue-darker: 200, 15%, 8%;
-    --gray: 0, 0%, 52%;
-    --gray-light: 0, 0%, 98%;
-    --white: 0, 0%, 100%;
+    --elements: 0, 0%, 100%;
+    --background: 0, 0%, 98%;
+    --text: 200, 15%, 8%;
+    --input: 0, 0%, 52%;
+  }
+
+  #app.dark {
+    --elements: 209, 23%, 22%;
+    --background: 207, 26%, 17%;
+    --text: 0, 0%, 100%;
   }
 }
