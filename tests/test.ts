@@ -17,4 +17,11 @@ test.describe('Home page', () => {
     await toggleBtn.click();
     await expect(app).toHaveClass('dark');
   });
+
+  test('has list of 20 countries initially', async ({ page }) => {
+    const AMOUNT_OF_COUNTRIES = 20;
+    const countries = page.locator('ul#countries > li');
+
+    await expect(countries).toHaveCount(AMOUNT_OF_COUNTRIES);
+  });
 });
