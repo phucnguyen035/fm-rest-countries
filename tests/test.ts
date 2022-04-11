@@ -12,9 +12,9 @@ test.describe('Home page', () => {
     await expect(toggleBtn).toBeVisible();
 
     await toggleBtn.click();
-    await expect(app).toHaveClass('dark');
+    await expect(app).toHaveClass('light');
 
     await toggleBtn.click();
-    await expect(app).toHaveClass('light');
+    await expect(app).toHaveClass('dark');
   });
 });
