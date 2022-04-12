@@ -24,4 +24,13 @@ test.describe('Home page', () => {
 
     await expect(countries).toHaveCount(AMOUNT_OF_COUNTRIES);
   });
+
+  test('should extend the list when scrolling to bottom', async ({ page }) => {
+    await page.locator('button:has-text("Load more")').scrollIntoViewIfNeeded();
+
+    const AMOUNT_OF_COUNTRIES = 40;
+    const countries = page.locator('ul#countries > li');
+
+    await expect(countries).toHaveCount(AMOUNT_OF_COUNTRIES);
+  });
 });
