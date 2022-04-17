@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Country } from '$lib/stores/country';
+  import { formatNumber } from '$lib/utils/format';
 
   export let country: Country;
 </script>
@@ -16,7 +17,10 @@
     <h4 class="text-lg font-bold">{country.name}</h4>
 
     <div class="leading-relaxed">
-      <p><span class="font-semibold">Population:</span> {country.population}</p>
+      <p>
+        <span class="font-semibold">Population:</span>
+        {formatNumber(country.population)}
+      </p>
       <p><span class="font-semibold">Region:</span> {country.region}</p>
       <p><span class="font-semibold">Capital:</span> {country.capital}</p>
     </div>
