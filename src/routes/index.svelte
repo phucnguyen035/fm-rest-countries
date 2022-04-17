@@ -8,10 +8,13 @@
   import { countries, getAllCountries } from '$lib/stores/country';
   import SearchIcon from '@rgossiaux/svelte-heroicons/solid/Search';
   import type { Load } from '@sveltejs/kit';
+  import { onMount } from 'svelte';
 
   export const load: Load = async (req) => {
-    const continent = req.url.searchParams.get('continent');
-    await getAllCountries(continent);
+    const type = req.url.searchParams.get('type');
+    const query = req.url.searchParams.get('q');
+
+    await getAllCountries(type, query);
 
     return {
       props: {},
@@ -39,16 +42,33 @@
   $: canLoadMore = page < maxPages;
 
   let continent = '';
+  let query = '';
+  let timer: number;
+  let ready = false;
+  let url = browser ? new URL(location.origin) : null;
 
-  $: if (browser) {
-    if (continent) {
-      goto(`/?continent=${continent}`);
-    } else {
-      goto('/');
-    }
+  $: if (continent) {
+    url.searchParams.set('type', 'continent');
+    url.searchParams.set('q', continent);
   }
 
-  let search = '';
+  $: if (query) {
+    url.searchParams.set('type', 'name');
+    url.searchParams.set('q', query);
+  }
+
+  const debouncedSearch = () => {
+    clearTimeout(timer);
+    timer = window.setTimeout(() => goto(url.toString()), 500);
+  };
+
+  onMount(() => {
+    ready = true;
+  });
+
+  $: if (ready && (continent || query)) {
+    debouncedSearch();
+  }
 </script>
 
 <div class="container">
@@ -56,11 +76,11 @@
     class="flex flex-col items-center space-y-4 desktop:flex-row desktop:justify-between desktop:space-y-0"
   >
     <FormInput
-      bind:value={search}
+      bind:value={query}
       label="Search"
       name="search"
       placeholder="Search for a country..."
-      class="w-full"
+      class="w-full desktop:w-72"
     >
       <SearchIcon class="h-5 w-5" slot="icon" />
     </FormInput>
