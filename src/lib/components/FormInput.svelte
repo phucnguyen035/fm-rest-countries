@@ -1,18 +1,21 @@
 <script lang="ts">
   import clsx from 'clsx';
 
+  let className = '';
+
   export let value: string;
   export let label: string;
   export let name: string;
   export let type = 'text';
   export let placeholder = '';
+  export { className as class };
 
   const setType = (node: HTMLInputElement) => {
     node.type = type;
   };
 </script>
 
-<div>
+<div class={className}>
   <label for={name} class="sr-only">{label}</label>
   <div class="relative rounded-md border-0 bg-elements shadow-sm">
     {#if $$slots.icon}

@@ -60,6 +60,7 @@
       label="Search"
       name="search"
       placeholder="Search for a country..."
+      class="w-full"
     >
       <SearchIcon class="h-5 w-5" slot="icon" />
     </FormInput>
