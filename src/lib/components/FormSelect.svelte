@@ -23,7 +23,7 @@
 
 <Listbox {value} let:open class={className} on:change={(e) => (value = e.detail)}>
   <ListboxButton
-    class="sm:text-sm w-full cursor-default rounded-md bg-elements p-6 text-left shadow-sm focus:outline-none focus:ring-1"
+    class="sm:text-sm w-full cursor-default rounded-md bg-elements p-4 text-left shadow-sm focus:outline-none focus:ring-1"
   >
     <span class="block truncate">
       {#if selected}

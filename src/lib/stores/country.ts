@@ -10,9 +10,11 @@ export type Country = {
 
 export const countries = writable<Country[]>();
 
-export async function getAllCountries() {
+export async function getAllCountries(continent = '') {
+  const path = continent ? `region/${continent}` : 'all';
+
   const res = await fetch(
-    'https://restcountries.com/v2/all?fields=name,population,region,capital,flag',
+    `https://restcountries.com/v2/${path}?fields=name,population,region,capital,flag`,
   );
   const data = await res.json();
 
