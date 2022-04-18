@@ -6,6 +6,7 @@
   import CountryCard from '$lib/components/CountryCard.svelte';
   import FormInput from '$lib/components/FormInput.svelte';
   import FormSelect from '$lib/components/FormSelect.svelte';
+  import Meta from '$lib/components/Meta.svelte';
   import SearchIcon from '@rgossiaux/svelte-heroicons/solid/Search';
   import type { Load } from './index';
 
@@ -77,6 +78,8 @@
     debouncedSearch();
   }
 </script>
+
+<Meta />
 
 <div class="space-y-4">
   <section
