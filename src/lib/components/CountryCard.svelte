@@ -5,7 +5,10 @@
   export let country: Country;
 </script>
 
-<div class="h-full overflow-hidden rounded-lg shadow dark:bg-elements">
+<a
+  href={`/country/${encodeURIComponent(country.alpha2Code.toLowerCase())}`}
+  class="block h-full overflow-hidden rounded-lg shadow dark:bg-elements"
+>
   <img
     src={country.flag}
     alt={`Flag of ${country.name}`}
@@ -25,4 +28,4 @@
       <p><span class="font-semibold">Capital:</span> {country.capital}</p>
     </div>
   </div>
-</div>
+</a>
