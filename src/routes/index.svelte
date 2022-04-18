@@ -78,36 +78,38 @@
   }
 </script>
 
-<section
-  class="flex flex-col items-center space-y-4 desktop:flex-row desktop:justify-between desktop:space-y-0"
->
-  <FormInput
-    bind:value={query}
-    label="Search"
-    name="search"
-    placeholder="Search for a country..."
-    class="w-full desktop:w-72"
+<div class="space-y-4">
+  <section
+    class="flex flex-col items-center space-y-4 desktop:flex-row desktop:justify-between desktop:space-y-0"
   >
-    <SearchIcon class="h-5 w-5" slot="icon" />
-  </FormInput>
-  <FormSelect
-    bind:value={continent}
-    class="relative w-full desktop:w-72"
-    {options}
-    placeholder="Filter by Region"
-  />
-</section>
+    <FormInput
+      bind:value={query}
+      label="Search"
+      name="search"
+      placeholder="Search for a country..."
+      class="w-full desktop:w-72"
+    >
+      <SearchIcon class="h-5 w-5" slot="icon" />
+    </FormInput>
+    <FormSelect
+      bind:value={continent}
+      class="relative w-full desktop:w-72"
+      {options}
+      placeholder="Filter by Region"
+    />
+  </section>
 
-<ul id="countries" class="grid gap-8 py-4 desktop:grid-cols-4">
-  {#each displayCountries as country}
-    <li>
-      <CountryCard {country} />
-    </li>
-  {/each}
-</ul>
+  <ul id="countries" class="grid gap-8 desktop:grid-cols-4">
+    {#each displayCountries as country}
+      <li>
+        <CountryCard {country} />
+      </li>
+    {/each}
+  </ul>
 
-{#if canLoadMore}
-  <div use:observe class="mx-auto text-center" on:intersecting={handleNextPage}>
-    <button disabled={!canLoadMore} on:click={handleNextPage}>Load more</button>
-  </div>
-{/if}
+  {#if canLoadMore}
+    <div use:observe class="mx-auto text-center" on:intersecting={handleNextPage}>
+      <button disabled={!canLoadMore} on:click={handleNextPage}>Load more</button>
+    </div>
+  {/if}
+</div>
