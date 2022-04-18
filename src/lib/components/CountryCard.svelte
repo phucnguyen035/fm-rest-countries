@@ -13,6 +13,7 @@
     src={country.flag}
     alt={`Flag of ${country.name}`}
     height="208"
+    loading="lazy"
     class="h-52 w-full object-cover"
   />
 
