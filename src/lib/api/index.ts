@@ -2,7 +2,7 @@ export type Country = {
   name: string;
   population: number;
   region: string;
-  capital: string;
+  capital?: string;
   flag: string;
   alpha2Code: string;
 };

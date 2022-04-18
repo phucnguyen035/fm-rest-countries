@@ -26,7 +26,7 @@
         {formatNumber(country.population)}
       </p>
       <p><span class="font-semibold">Region:</span> {country.region}</p>
-      <p><span class="font-semibold">Capital:</span> {country.capital}</p>
+      <p><span class="font-semibold">Capital:</span> {country.capital || 'N/A'}</p>
     </div>
   </div>
 </a>

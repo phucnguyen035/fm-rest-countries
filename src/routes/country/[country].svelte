@@ -39,7 +39,7 @@
       { label: 'Population', value: formatNumber(country.population) },
       { label: 'Region', value: country.region },
       { label: 'Sub region', value: country.subregion },
-      { label: 'Capital', value: country.capital },
+      { label: 'Capital', value: country.capital || 'N/A' },
     ],
     [
       { label: 'Top level domain', value: country.topLevelDomain.join(', ') },
