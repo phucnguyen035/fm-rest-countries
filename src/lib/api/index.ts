@@ -1,5 +1,3 @@
-import { writable } from 'svelte/store';
-
 export type Country = {
   name: string;
   population: number;
@@ -7,8 +5,6 @@ export type Country = {
   capital: string;
   flag: string;
 };
-
-export const countries = writable<Country[]>();
 
 export async function getAllCountries(type: string, query: string) {
   let path = 'all';
@@ -31,5 +27,5 @@ export async function getAllCountries(type: string, query: string) {
   const res = await fetch(url.toString());
   const data = await res.json();
 
-  countries.set(data);
+  return data;
 }

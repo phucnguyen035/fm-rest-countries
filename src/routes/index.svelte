@@ -5,7 +5,7 @@
   import CountryCard from '$lib/components/CountryCard.svelte';
   import FormInput from '$lib/components/FormInput.svelte';
   import FormSelect from '$lib/components/FormSelect.svelte';
-  import { countries, getAllCountries } from '$lib/stores/country';
+  import { getAllCountries, type Country } from '$lib/api';
   import SearchIcon from '@rgossiaux/svelte-heroicons/solid/Search';
   import type { Load } from '@sveltejs/kit';
   import { onMount } from 'svelte';
@@ -14,10 +14,10 @@
     const type = req.url.searchParams.get('type');
     const query = req.url.searchParams.get('q');
 
-    await getAllCountries(type, query);
+    const countries = await getAllCountries(type, query);
 
     return {
-      props: {},
+      props: { countries },
     };
   };
 </script>
@@ -37,8 +37,8 @@
     page++;
   };
 
-  $: displayCountries = $countries.slice(0, page * size);
-  $: maxPages = Math.ceil($countries.length / size);
+  $: displayCountries = countries.slice(0, page * size);
+  $: maxPages = Math.ceil(countries.length / size);
   $: canLoadMore = page < maxPages;
 
   let continent = '';
