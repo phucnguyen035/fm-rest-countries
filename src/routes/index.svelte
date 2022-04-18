@@ -2,7 +2,7 @@
   import { browser } from '$app/env';
   import { goto } from '$app/navigation';
   import { observe } from '$lib/actions/observe';
-  import { getAllCountries, type Country } from '$lib/api';
+  import { ApiError, getAllCountries, type Country } from '$lib/api';
   import CountryCard from '$lib/components/CountryCard.svelte';
   import FormInput from '$lib/components/FormInput.svelte';
   import FormSelect from '$lib/components/FormSelect.svelte';
@@ -14,11 +14,21 @@
     const type = req.url.searchParams.get('type');
     const query = req.url.searchParams.get('q');
 
-    const countries = await getAllCountries(type, query);
+    try {
+      const countries = await getAllCountries(type, query);
 
-    return {
-      props: { countries },
-    };
+      return {
+        props: { countries },
+      };
+    } catch (error) {
+      if (error instanceof ApiError) {
+        return {
+          props: { countries: [] },
+        };
+      }
+
+      return { status: 500, error };
+    }
   };
 </script>
 
@@ -107,6 +117,8 @@
       <li>
         <CountryCard {country} />
       </li>
+    {:else}
+      <li class="text-center text-lg desktop:col-span-4">No countries found.</li>
     {/each}
   </ul>
 
