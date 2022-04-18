@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
   import { browser } from '$app/env';
   import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import { observe } from '$lib/actions/observe';
   import { ApiError, getAllCountries, type Country } from '$lib/api';
   import CountryCard from '$lib/components/CountryCard.svelte';
@@ -41,19 +42,21 @@
   }));
 
   let size = 20;
-  let page = 1;
+  let currentPage = 1;
 
   const handleNextPage = () => {
-    if (page >= maxPages) return;
-    page++;
+    if (currentPage >= maxPages) return;
+    currentPage++;
   };
 
-  $: displayCountries = countries.slice(0, page * size);
+  $: displayCountries = countries.slice(0, currentPage * size);
   $: maxPages = Math.ceil(countries.length / size);
-  $: canLoadMore = page < maxPages;
+  $: canLoadMore = currentPage < maxPages;
 
-  let continent: string | null = null;
-  let query: string | null = null;
+  let continent: string | null =
+    $page.url.searchParams.get('type') === 'continent' ? $page.url.searchParams.get('q') : null;
+  let query: string | null =
+    $page.url.searchParams.get('type') === 'name' ? $page.url.searchParams.get('q') : null;
   let timer: number;
   let url = browser ? new URL(location.origin) : null;
 
@@ -70,9 +73,24 @@
     }, 500);
   };
 
+  const reset = (type: 'continent' | 'query') => {
+    switch (type) {
+      case 'continent':
+        continent = null;
+        break;
+      case 'query':
+        query = null;
+        break;
+
+      default:
+        break;
+    }
+  };
+
   $: if (continent !== null) {
     url?.searchParams.set('type', 'continent');
     url?.searchParams.set('q', continent);
+    reset('query');
     debouncedSearch();
   }
 
@@ -85,6 +103,7 @@
       url?.searchParams.delete('q');
     }
 
+    reset('continent');
     debouncedSearch();
   }
 </script>
