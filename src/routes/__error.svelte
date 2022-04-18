@@ -5,7 +5,7 @@
 </script>
 
 <div class="mb-4 space-y-2">
-  <h1 class="text-2xl font-semibold text-[tomato]">{$page.status} - {error.message}</h1>
+  <h2 class="text-2xl font-semibold text-[tomato]">{$page.status} - {error.message}</h2>
   {#if error.stack}
     <pre>{error.stack}</pre>
   {/if}
