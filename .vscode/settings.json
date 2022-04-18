@@ -1,3 +1,3 @@
 {
-  "conventionalCommits.scopes": ["package", "settings", "components", "routes"]
+  "conventionalCommits.scopes": ["package", "settings", "components", "routes", "seo"]
 }
