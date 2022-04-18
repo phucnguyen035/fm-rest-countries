@@ -18,7 +18,7 @@
   />
 
   <div class="space-y-4 p-8">
-    <h4 class="text-lg font-bold">{country.name}</h4>
+    <h2 class="text-lg font-bold">{country.name}</h2>
 
     <div class="leading-relaxed">
       <p>
