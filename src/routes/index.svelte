@@ -71,7 +71,6 @@
   }
 </script>
 
-<div class="container">
   <section
     class="flex flex-col items-center space-y-4 desktop:flex-row desktop:justify-between desktop:space-y-0"
   >
@@ -105,4 +104,3 @@
       <button disabled={!canLoadMore} on:click={handleNextPage}>Load more</button>
     </div>
   {/if}
-</div>
