@@ -7,7 +7,7 @@
 
 <a
   href={`/country/${encodeURIComponent(country.alpha2Code.toLowerCase())}`}
-  class="block h-full overflow-hidden rounded-lg shadow dark:bg-elements"
+  class="block h-full overflow-hidden rounded-lg shadow-md dark:bg-elements"
 >
   <img
     src={country.flag}

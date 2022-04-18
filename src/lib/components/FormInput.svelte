@@ -17,7 +17,7 @@
 
 <div class={className}>
   <label for={name} class="sr-only">{label}</label>
-  <div class="relative rounded-md border-0 bg-elements shadow-sm">
+  <div class="relative rounded-md border-0 bg-elements shadow">
     {#if $$slots.icon}
       <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-6">
         <slot name="icon" />
