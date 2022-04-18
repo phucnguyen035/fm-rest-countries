@@ -9,9 +9,31 @@ export type Country = {
 
 const API_URL = 'https://restcountries.com/v2';
 
-const callApi = (path: string, init?: RequestInit) => fetch(`${API_URL}/${path}`, init);
+export class ApiError extends Error {
+  constructor(public status: number, message?: string) {
+    super(message);
+  }
+}
 
-export async function getAllCountries(type: string | null, query: string | null) {
+const callApi = async <T = unknown>(path: string, init?: RequestInit): Promise<T> => {
+  const url = `${API_URL}/${path}`;
+  const res = await fetch(url, init);
+
+  console.log('res', res);
+
+  if (!res.ok && res.status < 500) {
+    const json = await res.json();
+
+    throw new ApiError(json.status, json.message);
+  }
+
+  return res.json();
+};
+
+export async function getAllCountries(
+  type: string | null,
+  query: string | null,
+): Promise<Country[]> {
   let path = 'all';
 
   switch (type) {
@@ -27,9 +49,8 @@ export async function getAllCountries(type: string | null, query: string | null)
   }
 
   const fields = ['name', 'population', 'region', 'capital', 'flag', 'alpha2Code'].join(',');
-  const res = await callApi(`${path}?fields=${fields}`);
 
-  return res.json();
+  return callApi(`${path}?fields=${fields}`);
 }
 
 export type CountryDetail = Pick<Country, 'name' | 'population' | 'capital' | 'flag'> & {
@@ -56,18 +77,22 @@ export async function getCountry(alpha2Code: string): Promise<CountryDetail | nu
     'currencies',
     'languages',
   ].join(',');
-  const res = await callApi(`alpha/${alpha2Code}?fields=${fields}`);
 
-  return res.ok ? res.json() : null;
+  return callApi<CountryDetail>(`alpha/${alpha2Code}?fields=${fields}`).catch((e) => {
+    if (e instanceof ApiError) {
+      return null;
+    }
+
+    throw e;
+  });
 }
 
 export type Neighbor = Pick<Country, 'name' | 'flag' | 'alpha2Code'>;
 
 export async function getBorderingCountries(borderArray: string[]): Promise<Neighbor[]> {
+  console.log('borderArray', borderArray);
   const codes = borderArray.map((c) => c.toLowerCase()).join(',');
   const fields = ['name', 'flag', 'alpha2Code'].join(',');
 
-  const res = await callApi(`alpha/?codes=${codes}&fields=${fields}`);
-
-  return res.json();
+  return callApi(`alpha/?codes=${codes}&fields=${fields}`);
 }
