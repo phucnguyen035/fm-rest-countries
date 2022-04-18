@@ -19,8 +19,6 @@ const callApi = async <T = unknown>(path: string, init?: RequestInit): Promise<T
   const url = `${API_URL}/${path}`;
   const res = await fetch(url, init);
 
-  console.log('res', res);
-
   if (!res.ok && res.status < 500) {
     const json = await res.json();
 
@@ -90,7 +88,6 @@ export async function getCountry(alpha2Code: string): Promise<CountryDetail | nu
 export type Neighbor = Pick<Country, 'name' | 'flag' | 'alpha2Code'>;
 
 export async function getBorderingCountries(borderArray: string[]): Promise<Neighbor[]> {
-  console.log('borderArray', borderArray);
   const codes = borderArray.map((c) => c.toLowerCase()).join(',');
   const fields = ['name', 'flag', 'alpha2Code'].join(',');
 
