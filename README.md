@@ -43,7 +43,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: https://github.com/phucnguyen035/frontend-mentor-rest-countries
+- Solution URL: https://www.frontendmentor.io/solutions/rest-countries-api-w-theme-switcher-built-w-sveltekit-tailwindcss-rJeap1oE5
 - Live Site URL: https://rest-countries.nguyenhphuc.com
 
 ## My process
