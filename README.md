@@ -31,7 +31,15 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Home screen light](https://github.com/phucnguyen035/frontend-mentor-rest-countries/blob/main/screenshots/Screenshot%202022-04-18%20at%2021-00-34%20REST%20countries%20-%20Frontend%20Mentor%20Challenge.png)
+
+![Home screen dark](https://github.com/phucnguyen035/frontend-mentor-rest-countries/blob/main/screenshots/Screenshot%202022-04-18%20at%2021-00-55%20REST%20countries%20-%20Frontend%20Mentor%20Challenge.png)
+
+![Home screen search](https://github.com/phucnguyen035/frontend-mentor-rest-countries/blob/main/screenshots/Screenshot%202022-04-18%20at%2021-01-27%20REST%20countries%20-%20Frontend%20Mentor%20Challenge.png)
+
+![Detail screen light](https://github.com/phucnguyen035/frontend-mentor-rest-countries/blob/main/screenshots/Screenshot%202022-04-18%20at%2021-02-38%20France%20-%20Frontend%20Mentor%20Challenge.png)
+
+![Detail screen dark](https://github.com/phucnguyen035/frontend-mentor-rest-countries/blob/main/screenshots/Screenshot%202022-04-18%20at%2021-01-42%20Brazil%20-%20Frontend%20Mentor%20Challenge.png)
 
 ### Links
 
