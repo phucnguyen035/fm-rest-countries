@@ -3,7 +3,7 @@
 
   let className = '';
 
-  export let value: string;
+  export let value: string | null;
   export let label: string;
   export let name: string;
   export let type = 'text';

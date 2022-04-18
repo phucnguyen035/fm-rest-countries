@@ -52,22 +52,26 @@
     }
 
     clearTimeout(timer);
-    timer = window.setTimeout(() => goto(url.toString()), 500);
+    timer = window.setTimeout(() => {
+      if (url) {
+        goto(url.toString());
+      }
+    }, 500);
   };
 
   $: if (continent !== null) {
-    url.searchParams.set('type', 'continent');
-    url.searchParams.set('q', continent);
+    url?.searchParams.set('type', 'continent');
+    url?.searchParams.set('q', continent);
     debouncedSearch();
   }
 
   $: if (query !== null) {
     if (query) {
-      url.searchParams.set('type', 'name');
-      url.searchParams.set('q', query);
+      url?.searchParams.set('type', 'name');
+      url?.searchParams.set('q', query);
     } else {
-      url.searchParams.delete('type');
-      url.searchParams.delete('q');
+      url?.searchParams.delete('type');
+      url?.searchParams.delete('q');
     }
 
     debouncedSearch();

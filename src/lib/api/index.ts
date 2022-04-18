@@ -11,7 +11,7 @@ const API_URL = 'https://restcountries.com/v2';
 
 const callApi = (path: string, init?: RequestInit) => fetch(`${API_URL}/${path}`, init);
 
-export async function getAllCountries(type: string, query: string) {
+export async function getAllCountries(type: string | null, query: string | null) {
   let path = 'all';
 
   switch (type) {

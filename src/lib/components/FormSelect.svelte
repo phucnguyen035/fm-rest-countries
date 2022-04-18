@@ -13,7 +13,7 @@
 
   let className = '';
 
-  export let value: string | number | boolean;
+  export let value: string | number | boolean | null;
   export let placeholder = 'Select';
   export let options: Option[];
   export { className as class };
