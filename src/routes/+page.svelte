@@ -1,40 +1,18 @@
 <script context="module" lang="ts">
-  import { browser } from '$app/env';
+  import { browser } from '$app/environment';
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import { observe } from '$lib/actions/observe';
-  import { ApiError, getAllCountries, type Country } from '$lib/api';
   import CountryCard from '$lib/components/CountryCard.svelte';
   import FormInput from '$lib/components/FormInput.svelte';
   import FormSelect from '$lib/components/FormSelect.svelte';
   import Meta from '$lib/components/Meta.svelte';
   import SearchIcon from '@rgossiaux/svelte-heroicons/solid/Search';
-  import type { Load } from './index';
-
-  export const load: Load = async (req) => {
-    const type = req.url.searchParams.get('type');
-    const query = req.url.searchParams.get('q');
-
-    try {
-      const countries = await getAllCountries(type, query);
-
-      return {
-        props: { countries },
-      };
-    } catch (error) {
-      if (error instanceof ApiError) {
-        return {
-          props: { countries: [] },
-        };
-      }
-
-      return { status: 500, error };
-    }
-  };
+  import type { PageData } from './$types';
 </script>
 
 <script lang="ts">
-  export let countries: Country[];
+  export let data: PageData;
 
   const options = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'].map((c) => ({
     label: c,
@@ -49,6 +27,7 @@
     currentPage++;
   };
 
+  $: countries = data.countries ?? [];
   $: displayCountries = countries.slice(0, currentPage * size);
   $: maxPages = Math.ceil(countries.length / size);
   $: canLoadMore = currentPage < maxPages;
