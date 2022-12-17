@@ -3,10 +3,11 @@
   import MoonIcon from '@rgossiaux/svelte-heroicons/solid/Moon';
   import SunIcon from '@rgossiaux/svelte-heroicons/solid/Sun';
 
-  $: isDarkTheme = $theme === 'dark';
+  $: isDarkMode = $theme === 'dark';
 
   const onClick = () => {
-    const nextTheme = $theme === 'dark' ? 'light' : 'dark';
+    const nextTheme = isDarkMode ? 'light' : 'dark';
+
     setTheme(nextTheme);
   };
 </script>
@@ -17,13 +18,13 @@
   class="flex items-center p-2 focus:outline"
   on:click={onClick}
 >
-  {#if isDarkTheme}
+  {#if isDarkMode}
     <SunIcon class="h-6 w-6" />
   {:else}
     <MoonIcon class="h-6 w-6" />
   {/if}
   <span id="dark-mode" class="ml-2">
-    {#if isDarkTheme}
+    {#if isDarkMode}
       Light mode
     {:else}
       Dark mode

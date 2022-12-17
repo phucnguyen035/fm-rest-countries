@@ -1,18 +1,12 @@
-import { browser } from '$app/env';
-import { session } from '$app/stores';
-import { derived, type Readable } from 'svelte/store';
+import { writable } from 'svelte/store';
+import { z } from 'zod';
 
-export type Theme = App.Session['theme'];
+export const Theme = z.enum(['dark', 'light']);
+export type Theme = z.infer<typeof Theme>;
 
-export const theme: Readable<Theme> = derived(session, ($session, set) => {
-  if ($session.theme) {
-    set($session.theme);
-  } else if (browser) {
-    set(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  }
-});
+export const theme = writable<Theme>();
 
-export const setTheme = (t: Theme) => {
-  session.update(($session) => ({ ...$session, theme: t }));
-  fetch('/theme', { body: t, method: 'PUT' });
+export const setTheme = (newTheme: Theme) => {
+  fetch('/theme', { body: newTheme, method: 'PUT' });
+  theme.set(newTheme);
 };
