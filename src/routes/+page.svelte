@@ -19,7 +19,7 @@
     value: c.toLowerCase(),
   }));
 
-  let size = 20;
+  let size = parseInt($page.url.searchParams.get('size') ?? '20');
   let currentPage = 1;
 
   const handleNextPage = () => {
