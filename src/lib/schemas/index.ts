@@ -39,3 +39,10 @@ export const CountryDetail = Country.pick({
   ),
 });
 export type CountryDetail = z.infer<typeof CountryDetail>;
+
+export const Neighbor = Country.pick({
+  name: true,
+  flag: true,
+  alpha2Code: true,
+});
+export type Neighbor = z.infer<typeof Neighbor>;
