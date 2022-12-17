@@ -1,5 +1,5 @@
 <script lang="ts">
-  import * as NProgress from 'nprogress';
+  import NProgress from 'nprogress';
   import { navigating } from '$app/stores';
   import Footer from '$lib/components/Footer.svelte';
   import Header from '$lib/components/Header.svelte';
