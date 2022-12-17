@@ -9,7 +9,10 @@ const handleParseResult = <Input, Output>(result: z.SafeParseReturnType<Input, O
   return result.data;
 };
 
-export const parseJsonObject = async <O extends z.AnyZodObject>(object: O, json: unknown) => {
+export const parseJsonObject = async <Shape extends z.ZodRawShape>(
+  object: z.ZodObject<Shape>,
+  json: unknown,
+) => {
   return handleParseResult(await object.safeParseAsync(json));
 };
 
