@@ -48,11 +48,25 @@ test.describe('Home page', () => {
   });
 
   test('should be able to search', async ({ page }) => {
-    const AMOUNT_OF_COUNTRIES = 1;
-    const searchInput = page.locator('input#search');
+    const searchInput = page.getByLabel('Search');
     const countries = page.locator('ul#countries > li');
 
-    await searchInput.fill('United States of America');
-    await expect(countries).toHaveCount(AMOUNT_OF_COUNTRIES);
+    await searchInput.fill('Vietnam');
+    await expect(countries).toHaveCount(1);
+  });
+
+  test('should be able to filter by continent', async ({ page }) => {
+    page.goto('/?size=300');
+
+    const countries = page.locator('ul#countries > li');
+    await expect(countries).toHaveCount(250);
+
+    const dropdown = page.getByText('Filter by Region');
+    await dropdown.click();
+
+    const europeOption = page.getByText('Oceania', { exact: true });
+    await europeOption.click();
+
+    await expect(countries).toHaveCount(27);
   });
 });
