@@ -1,19 +1,39 @@
-import { ApiError, getAllCountries } from '$lib/api';
+import { error } from '@sveltejs/kit';
+import { Country } from '$lib/schemas';
+import { API_URL } from '$lib/utils/constants';
+import { parseJsonArray } from '$lib/utils/parse';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async (req) => {
-  const type = req.url.searchParams.get('type');
-  const query = req.url.searchParams.get('q');
+const getCountriesPath = (type: string | null, query: string | null) => {
+  let path = 'all';
 
-  try {
-    const countries = await getAllCountries(type, query);
+  switch (type) {
+    case 'continent':
+      path = `region/${query}`;
+      break;
+    case 'name':
+      path = `name/${query}`;
+      break;
 
-    return { countries };
-  } catch (error) {
-    if (error instanceof ApiError) {
-      return { countries: [] };
-    }
-
-    return { status: 500, error };
+    default:
+      break;
   }
+
+  return path;
+};
+
+export const load: PageLoad = async ({ url, fetch }) => {
+  const path = getCountriesPath(url.searchParams.get('type'), url.searchParams.get('q'));
+  const fields = ['name', 'population', 'region', 'capital', 'flag', 'alpha2Code'].join(',');
+
+  const res = await fetch(`${API_URL}/${path}?fields=${fields}`);
+  if (!res.ok) {
+    throw error(500, 'Error fetching countries');
+  }
+
+  const json = await res.json();
+
+  return {
+    countries: await parseJsonArray(Country, json),
+  };
 };
