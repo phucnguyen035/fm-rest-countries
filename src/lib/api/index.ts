@@ -28,29 +28,6 @@ const callApi = async <T = unknown>(path: string, init?: RequestInit): Promise<T
   return res.json();
 };
 
-export async function getAllCountries(
-  type: string | null,
-  query: string | null,
-): Promise<Country[]> {
-  let path = 'all';
-
-  switch (type) {
-    case 'continent':
-      path = `region/${query}`;
-      break;
-    case 'name':
-      path = `name/${query}`;
-      break;
-
-    default:
-      break;
-  }
-
-  const fields = ['name', 'population', 'region', 'capital', 'flag', 'alpha2Code'].join(',');
-
-  return callApi(`${path}?fields=${fields}`);
-}
-
 export type CountryDetail = Pick<Country, 'name' | 'population' | 'capital' | 'flag'> & {
   topLevelDomain: string[];
   nativeName: string;
