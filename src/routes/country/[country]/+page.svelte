@@ -1,36 +1,17 @@
 <script context="module" lang="ts">
   import ArrowLeftIcon from '@rgossiaux/svelte-heroicons/solid/ArrowLeft';
-  import { getBorderingCountries, getCountry, type CountryDetail, type Neighbor } from '$lib/api';
   import Button from '$lib/components/Button.svelte';
   import Meta from '$lib/components/Meta.svelte';
   import NeighborPill from '$lib/components/NeighborPill.svelte';
   import { formatNumber } from '$lib/utils/format';
-  import type { Load } from './[country]';
-
-  export const load: Load = async ({ params }) => {
-    const country = await getCountry(params.country);
-
-    if (!country) {
-      return {
-        error: new Error('Country not found'),
-        status: 404,
-      };
-    }
-
-    const neighbors = country.borders?.length ? await getBorderingCountries(country.borders) : [];
-
-    return {
-      props: {
-        country,
-        neighbors,
-      },
-    };
-  };
+  import type { PageData } from './$types';
 </script>
 
 <script lang="ts">
-  export let country: CountryDetail;
-  export let neighbors: Neighbor[];
+  export let data: PageData;
+
+  $: country = data.country;
+  $: neighbors = data.neighbors;
 
   $: imageAlt = `Flag of ${country.name}`;
   $: info = [
