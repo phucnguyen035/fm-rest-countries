@@ -32,8 +32,9 @@ export const load: PageLoad = async ({ url, fetch }) => {
   }
 
   const json = await res.json();
+  const countries = await parseJsonArray(Country, json);
 
   return {
-    countries: await parseJsonArray(Country, json),
+    countries,
   };
 };
