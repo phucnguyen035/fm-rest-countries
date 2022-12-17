@@ -8,8 +8,8 @@ declare namespace App {
   }
   // interface Locals {}
   // interface Platform {}
-  interface Session {
-    theme: 'light' | 'dark';
+  interface PageData {
+    theme?: 'light' | 'dark';
   }
   // interface Stuff {}
 }
