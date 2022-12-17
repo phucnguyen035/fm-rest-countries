@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test.describe('Home page', () => {
   test.beforeEach(async ({ page }) => {
+    await page.context().clearCookies();
     await page.goto('/');
   });
 
@@ -10,6 +11,7 @@ test.describe('Home page', () => {
     const app = page.locator('#app');
 
     await expect(toggleBtn).toBeVisible();
+    await expect(app).toHaveClass('light');
 
     await toggleBtn.click();
     await expect(app).toHaveClass('light');
