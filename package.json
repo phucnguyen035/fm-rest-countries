@@ -61,7 +61,7 @@
       [
         "@semantic-release/commit-analyzer",
         {
-          "preset": "angular",
+          "preset": "conventionalcommits",
           "releaseRules": [
             {
               "type": "docs",
@@ -70,7 +70,7 @@
             },
             {
               "type": "refactor",
-              "scope": "core-*",
+              "scope": "components",
               "release": "minor"
             },
             {
@@ -84,7 +84,12 @@
           ]
         }
       ],
-      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits"
+        }
+      ],
       "@semantic-release/github"
     ],
     "branches": [
