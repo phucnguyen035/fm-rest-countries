@@ -2,7 +2,6 @@ name: Test and create release
 
 on:
   deployment_status:
-    types: [success]
 
 env:
   NODE_VERSION: 18.9.0
