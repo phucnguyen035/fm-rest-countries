@@ -7,7 +7,7 @@
     Transition,
   } from '@rgossiaux/svelte-headlessui';
   import CheckIcon from '@rgossiaux/svelte-heroicons/solid/Check';
-  import cx from 'classix';
+  import { cx } from 'classix';
 
   type Option = { label: string; value: typeof value; disabled?: boolean };
 

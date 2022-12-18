@@ -1,5 +1,5 @@
 <script lang="ts">
-  import cx from 'classix';
+  import { cx } from 'classix';
 
   let className = '';
 
