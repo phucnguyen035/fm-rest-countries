@@ -7,7 +7,7 @@
     Transition,
   } from '@rgossiaux/svelte-headlessui';
   import CheckIcon from '@rgossiaux/svelte-heroicons/solid/Check';
-  import clsx from 'clsx';
+  import cx from 'classix';
 
   type Option = { label: string; value: typeof value; disabled?: boolean };
 
@@ -50,7 +50,7 @@
           let:active
           let:selected
           class={({ active, selected }) =>
-            clsx(
+            cx(
               'relative cursor-default select-none py-2 pl-8 pr-4',
               active && 'bg-background',
               selected && 'font-bold',
@@ -58,7 +58,7 @@
         >
           {#if selected}
             <span
-              class={clsx(
+              class={cx(
                 'absolute inset-y-0 left-0 flex items-center pl-1.5',
                 active ? 'text-white' : 'text-indigo-600',
               )}

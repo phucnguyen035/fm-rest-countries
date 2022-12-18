@@ -1,5 +1,5 @@
 <script lang="ts">
-  import clsx from 'clsx';
+  import cx from 'classix';
 
   let className = '';
 
@@ -30,7 +30,7 @@
       id={name}
       {name}
       {placeholder}
-      class={clsx(
+      class={cx(
         'sm:text-sm block w-full rounded-md border-0 bg-elements py-4 pl-14',
         $$slots.icon && 'pr-8',
       )}
