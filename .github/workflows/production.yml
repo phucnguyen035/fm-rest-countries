@@ -36,11 +36,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: merge
-        uses: mtanzi/action-automerge@v1
-        id: merge
+      - name: Sync release branch with main
+        uses: connor-baer/action-sync-branch@main
         with:
-          github_token: ${{ github.token }}
-          source: 'main'
-          target: 'release'
-          webhook_url: #if present add the Slack webhook
+          branch: release
+          token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
