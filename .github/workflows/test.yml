@@ -29,4 +29,4 @@ jobs:
         run: yarn test
         env:
           PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}
-          PUBLIC_API_URL: ${{ env.PUBLIC_API_URL }}
+          PUBLIC_API_URL: ${{ vars.API_URL }}
