@@ -18,10 +18,11 @@ jobs:
       - name: Setup Node.Js
         uses: actions/setup-node@v3
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - name: Install Playwright
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: yarn test
         env:
           PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}
+          PUBLIC_API_URL: ${{ env.PUBLIC_API_URL }}
