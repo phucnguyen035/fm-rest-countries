@@ -19,8 +19,6 @@ jobs:
         with:
           fetch-depth: 0
       - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release --debug
 
   deploy:
