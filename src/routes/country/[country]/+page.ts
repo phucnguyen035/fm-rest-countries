@@ -1,7 +1,7 @@
-import { CountryDetail, Neighbor } from '$lib/schemas';
-import { API_URL } from '$lib/utils/constants';
-import { parseJsonArray, parseJsonObject } from '$lib/utils/parse';
 import { error } from '@sveltejs/kit';
+import { PUBLIC_API_URL } from '$env/static/public';
+import { CountryDetail, Neighbor } from '$lib/schemas';
+import { parseJsonArray, parseJsonObject } from '$lib/utils/parse';
 import type { PageLoad } from './$types';
 
 const getCountry = async (fetch: typeof global.fetch, alpha2Code: string) => {
@@ -19,7 +19,7 @@ const getCountry = async (fetch: typeof global.fetch, alpha2Code: string) => {
     'languages',
   ].join(',');
 
-  const res = await fetch(`${API_URL}/alpha/${alpha2Code}?fields=${fields}`);
+  const res = await fetch(`${PUBLIC_API_URL}/alpha/${alpha2Code}?fields=${fields}`);
   if (!res.ok) {
     if (res.status === 404) {
       throw error(404, 'Country not found');
@@ -39,7 +39,7 @@ const getBorderingCountries = async (fetch: typeof global.fetch, borders?: strin
   const codes = borders.map((c) => c.toLowerCase()).join(',');
   const fields = ['name', 'flag', 'alpha2Code'].join(',');
 
-  const res = await fetch(`${API_URL}/alpha/?codes=${codes}&fields=${fields}`);
+  const res = await fetch(`${PUBLIC_API_URL}/alpha/?codes=${codes}&fields=${fields}`);
   if (!res.ok) {
     throw error(500, 'Error fetching bordering countries');
   }
@@ -47,7 +47,7 @@ const getBorderingCountries = async (fetch: typeof global.fetch, borders?: strin
   return await parseJsonArray(Neighbor, await res.json());
 };
 
-export const load: PageLoad = async ({ params, fetch }) => {
+export const load = (async ({ params, fetch }) => {
   const country = await getCountry(fetch, params.country);
   const neighbors = await getBorderingCountries(fetch, country.borders);
 
@@ -55,4 +55,4 @@ export const load: PageLoad = async ({ params, fetch }) => {
     country,
     neighbors,
   };
-};
+}) satisfies PageLoad;

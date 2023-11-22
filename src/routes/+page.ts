@@ -1,8 +1,7 @@
 import { error } from '@sveltejs/kit';
+import { PUBLIC_API_URL } from '$env/static/public';
 import { Country } from '$lib/schemas';
-import { API_URL } from '$lib/utils/constants';
 import { parseJsonArray } from '$lib/utils/parse';
-import type { PageLoad } from './$types';
 
 const getCountriesPath = (type: string | null, query: string | null) => {
   let path = 'all';
@@ -22,11 +21,11 @@ const getCountriesPath = (type: string | null, query: string | null) => {
   return path;
 };
 
-export const load: PageLoad = async ({ url, fetch }) => {
+export async function load({ url, fetch }) {
   const path = getCountriesPath(url.searchParams.get('type'), url.searchParams.get('q'));
   const fields = ['name', 'population', 'region', 'capital', 'flag', 'alpha2Code'].join(',');
 
-  const res = await fetch(`${API_URL}/${path}?fields=${fields}`);
+  const res = await fetch(`${PUBLIC_API_URL}/${path}?fields=${fields}`);
   if (!res.ok) {
     throw error(500, 'Error fetching countries');
   }
@@ -37,4 +36,4 @@ export const load: PageLoad = async ({ url, fetch }) => {
   return {
     countries,
   };
-};
+}
