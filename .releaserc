@@ -10,7 +10,7 @@
     [
       "@semantic-release/release-notes-generator",
       {
-        "preset": "angular",
+        "preset": "angular"
       }
     ],
     "@semantic-release/github"
