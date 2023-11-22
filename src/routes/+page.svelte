@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+  import SearchIcon from '@rgossiaux/svelte-heroicons/solid/Search';
   import { browser } from '$app/environment';
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
@@ -7,12 +8,10 @@
   import FormInput from '$lib/components/FormInput.svelte';
   import FormSelect from '$lib/components/FormSelect.svelte';
   import Meta from '$lib/components/Meta.svelte';
-  import SearchIcon from '@rgossiaux/svelte-heroicons/solid/Search';
-  import type { PageData } from './$types';
 </script>
 
 <script lang="ts">
-  export let data: PageData;
+  export let data;
 
   const options = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'].map((c) => ({
     label: c,
@@ -39,7 +38,7 @@
   let timer: number;
   let url = browser ? new URL(location.origin) : null;
 
-  const debouncedSearch = () => {
+  function debouncedSearch() {
     if (!browser) {
       return;
     }
@@ -50,9 +49,9 @@
         goto(url.toString());
       }
     }, 500);
-  };
+  }
 
-  const reset = (type: 'continent' | 'query') => {
+  function reset(type: 'continent' | 'query') {
     switch (type) {
       case 'continent':
         continent = null;
@@ -64,7 +63,7 @@
       default:
         break;
     }
-  };
+  }
 
   $: if (continent !== null) {
     url?.searchParams.set('type', 'continent');

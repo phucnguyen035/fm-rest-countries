@@ -2,9 +2,8 @@ import { error } from '@sveltejs/kit';
 import { PUBLIC_API_URL } from '$env/static/public';
 import { CountryDetail, Neighbor } from '$lib/schemas';
 import { parseJsonArray, parseJsonObject } from '$lib/utils/parse';
-import type { PageLoad } from './$types';
 
-const getCountry = async (fetch: typeof global.fetch, alpha2Code: string) => {
+const getCountry = async (fetch: typeof globalThis.fetch, alpha2Code: string) => {
   const fields = [
     'name',
     'population',
@@ -31,7 +30,7 @@ const getCountry = async (fetch: typeof global.fetch, alpha2Code: string) => {
   return await parseJsonObject(CountryDetail, await res.json());
 };
 
-const getBorderingCountries = async (fetch: typeof global.fetch, borders?: string[]) => {
+const getBorderingCountries = async (fetch: typeof globalThis.fetch, borders?: string[]) => {
   if (!borders?.length) {
     return [];
   }
@@ -47,7 +46,7 @@ const getBorderingCountries = async (fetch: typeof global.fetch, borders?: strin
   return await parseJsonArray(Neighbor, await res.json());
 };
 
-export const load = (async ({ params, fetch }) => {
+export async function load({ params, fetch }) {
   const country = await getCountry(fetch, params.country);
   const neighbors = await getBorderingCountries(fetch, country.borders);
 
@@ -55,4 +54,4 @@ export const load = (async ({ params, fetch }) => {
     country,
     neighbors,
   };
-}) satisfies PageLoad;
+}

@@ -1,14 +1,11 @@
-<script context="module" lang="ts">
+<script lang="ts">
   import ArrowLeftIcon from '@rgossiaux/svelte-heroicons/solid/ArrowLeft';
   import Button from '$lib/components/Button.svelte';
   import Meta from '$lib/components/Meta.svelte';
   import NeighborPill from '$lib/components/NeighborPill.svelte';
   import { formatNumber } from '$lib/utils/format';
-  import type { PageData } from './$types';
-</script>
 
-<script lang="ts">
-  export let data: PageData;
+  export let data;
 
   $: country = data.country;
   $: neighbors = data.neighbors;

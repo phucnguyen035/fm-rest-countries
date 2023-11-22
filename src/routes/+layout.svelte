@@ -1,15 +1,14 @@
 <script lang="ts">
   import NProgress from 'nprogress';
+  import { browser } from '$app/environment';
   import { navigating } from '$app/stores';
   import Footer from '$lib/components/Footer.svelte';
   import Header from '$lib/components/Header.svelte';
+  import { theme } from '$lib/stores/theme';
   import '../app.postcss';
   import 'nprogress/nprogress.css';
-  import { theme } from '$lib/stores/theme';
-  import { browser } from '$app/environment';
-  import type { PageData } from './$types';
 
-  export let data: PageData;
+  export let data;
 
   if (data.theme) {
     $theme = data.theme;
