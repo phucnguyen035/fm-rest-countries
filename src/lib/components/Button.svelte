@@ -1,5 +1,5 @@
 <button
-  class="flex items-center rounded bg-elements py-4 px-8 shadow-md transition-shadow hover:shadow-lg"
+  class="flex items-center rounded bg-elements px-8 py-4 shadow-md transition-shadow hover:shadow-lg"
   on:click
 >
   {#if $$slots.icon}
