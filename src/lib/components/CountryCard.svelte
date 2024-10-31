@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Country } from '$lib/api';
+  import type { Country } from '$lib/schemas';
   import { formatNumber } from '$lib/utils/format';
 
   export let country: Country;
