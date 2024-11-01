@@ -1,7 +1,8 @@
 import { error } from '@sveltejs/kit';
+import { parse, array, pipe, object, string, number, boolean, optional, mapItems } from 'valibot';
+
 import { PUBLIC_API_URL } from '$env/static/public';
-import { Country } from '$lib/schemas';
-import { parseJsonArray } from '$lib/utils/parse';
+import type { Country } from '$lib/schemas';
 
 const getCountriesPath = (type: string | null, query: string | null) => {
   let path = 'all';
@@ -21,19 +22,51 @@ const getCountriesPath = (type: string | null, query: string | null) => {
   return path;
 };
 
+const GetCountriesSchema = pipe(
+  array(
+    object({
+      name: object({
+        common: string(),
+        official: string(),
+      }),
+      population: number(),
+      region: string(),
+      capital: array(string()),
+      cca2: string(),
+      independent: optional(boolean()),
+      flags: object({
+        svg: string(),
+        png: string(),
+        alt: string(),
+      }),
+    }),
+  ),
+  mapItems(
+    (country): Country => ({
+      name: country.name.common,
+      population: country.population,
+      region: country.region,
+      capital: country.capital[0],
+      flag: country.flags.svg,
+      alpha2Code: country.cca2,
+      independent: country.independent ?? false,
+    }),
+  ),
+);
+
 export async function load({ url, fetch }) {
   const path = getCountriesPath(url.searchParams.get('type'), url.searchParams.get('q'));
-  const fields = ['name', 'population', 'region', 'capital', 'flag', 'alpha2Code'].join(',');
+  const fields = ['name', 'population', 'region', 'capital', 'flags', 'cca2', 'independent'].join(
+    ',',
+  );
+  const apiUrl = `${PUBLIC_API_URL}/${path}?fields=${fields}`;
 
-  const res = await fetch(`${PUBLIC_API_URL}/${path}?fields=${fields}`);
+  const res = await fetch(apiUrl);
   if (!res.ok) {
     throw error(500, 'Error fetching countries');
   }
 
-  const json = await res.json();
-  const countries = await parseJsonArray(Country, json);
-
   return {
-    countries,
+    countries: parse(GetCountriesSchema, await res.json()),
   };
 }

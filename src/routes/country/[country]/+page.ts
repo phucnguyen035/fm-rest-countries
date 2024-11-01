@@ -1,7 +1,7 @@
+import { array, parse } from 'valibot';
 import { error } from '@sveltejs/kit';
 import { PUBLIC_API_URL } from '$env/static/public';
 import { CountryDetail, Neighbor } from '$lib/schemas';
-import { parseJsonArray, parseJsonObject } from '$lib/utils/parse';
 
 const getCountry = async (fetch: typeof globalThis.fetch, alpha2Code: string) => {
   const fields = [
@@ -27,7 +27,7 @@ const getCountry = async (fetch: typeof globalThis.fetch, alpha2Code: string) =>
     }
   }
 
-  return await parseJsonObject(CountryDetail, await res.json());
+  return parse(CountryDetail, await res.json());
 };
 
 const getBorderingCountries = async (fetch: typeof globalThis.fetch, borders?: string[]) => {
@@ -43,7 +43,7 @@ const getBorderingCountries = async (fetch: typeof globalThis.fetch, borders?: s
     throw error(500, 'Error fetching bordering countries');
   }
 
-  return await parseJsonArray(Neighbor, await res.json());
+  return parse(array(Neighbor), await res.json());
 };
 
 export async function load({ params, fetch }) {
