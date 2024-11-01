@@ -13,7 +13,12 @@
   $: imageAlt = data.country.flags.alt || `Flag of ${country.name.common}`;
   $: info = [
     [
-      { label: 'Native name', value: country.name.nativeName?.['eng'].official },
+      {
+        label: 'Native names',
+        value: Object.values(country.name.nativeName ?? {})
+          .map(({ official }) => official)
+          .join(', '),
+      },
       { label: 'Population', value: formatNumber(country.population) },
       { label: 'Region', value: country.region },
       { label: 'Sub region', value: country.subregion },
@@ -55,7 +60,7 @@
 
     <div class="w-full">
       <section class="mb-8">
-        <h2 class="text-3xl font-extrabold">{country.name}</h2>
+        <h2 class="text-3xl font-extrabold">{country.name.common}</h2>
       </section>
 
       <section class="flex flex-col justify-between gap-y-10 desktop:flex-row">
