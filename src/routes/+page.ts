@@ -68,9 +68,7 @@ const GetCountriesSchema = pipe(
 
 export async function load({ url, fetch }) {
   const path = getCountriesPath(url.searchParams.get('type'), url.searchParams.get('q'));
-  const fields = ['name', 'population', 'region', 'capital', 'flags', 'cca2', 'independent'].join(
-    ',',
-  );
+  const fields = Object.keys(GetCountriesSchema.item.entries).join(',');
   const apiUrl = `${PUBLIC_API_URL}/${path}?fields=${fields}`;
 
   const res = await fetch(apiUrl);
