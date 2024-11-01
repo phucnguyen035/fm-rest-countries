@@ -4,7 +4,7 @@ export const ThemeEnum = {
   DARK: 'dark',
   LIGHT: 'light',
 } as const;
-export type ThemeEnum = keyof typeof ThemeEnum;
+export type ThemeEnum = (typeof ThemeEnum)[keyof typeof ThemeEnum];
 
 export const theme = writable<ThemeEnum>();
 
