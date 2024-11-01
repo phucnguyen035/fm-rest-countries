@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script lang="ts">
   import SearchIcon from '@rgossiaux/svelte-heroicons/solid/Search';
   import { browser } from '$app/environment';
   import { goto } from '$app/navigation';
@@ -8,9 +8,7 @@
   import FormInput from '$lib/components/FormInput.svelte';
   import FormSelect from '$lib/components/FormSelect.svelte';
   import Meta from '$lib/components/Meta.svelte';
-</script>
 
-<script lang="ts">
   export let data;
 
   const options = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'].map((c) => ({
@@ -31,9 +29,10 @@
   $: maxPages = Math.ceil(countries.length / size);
   $: canLoadMore = currentPage < maxPages;
 
-  let continent: string | null =
-    $page.url.searchParams.get('type') === 'continent' ? $page.url.searchParams.get('q') : null;
-  let query: string | null =
+  let continent =
+    ($page.url.searchParams.get('type') === 'continent' ? $page.url.searchParams.get('q') : null) ??
+    '';
+  let query =
     $page.url.searchParams.get('type') === 'name' ? $page.url.searchParams.get('q') : null;
   let timer: number;
   let url = browser ? new URL(location.origin) : null;
@@ -54,7 +53,7 @@
   function reset(type: 'continent' | 'query') {
     switch (type) {
       case 'continent':
-        continent = null;
+        continent = '';
         break;
       case 'query':
         query = null;
@@ -65,7 +64,7 @@
     }
   }
 
-  $: if (continent !== null) {
+  $: if (continent !== '') {
     url?.searchParams.set('type', 'continent');
     url?.searchParams.set('q', continent);
     reset('query');
@@ -104,7 +103,7 @@
     <FormSelect
       bind:value={continent}
       class="relative w-full desktop:w-72"
-      {options}
+      items={options}
       placeholder="Filter by Region"
     />
   </section>
@@ -120,8 +119,8 @@
   </ul>
 
   {#if canLoadMore}
-    <div use:observe class="mx-auto text-center" on:intersecting={handleNextPage}>
-      <button disabled={!canLoadMore} on:click={handleNextPage}>Load more</button>
+    <div use:observe class="mx-auto text-center" onintersecting={handleNextPage}>
+      <button disabled={!canLoadMore} onclick={handleNextPage}>Load more</button>
     </div>
   {/if}
 </div>
