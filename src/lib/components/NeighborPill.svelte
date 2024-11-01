@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Neighbor } from '$lib/api';
+  import type { Country } from '$lib/schemas';
 
-  export let neighbor: Neighbor;
+  export let neighbor: Pick<Country, 'name' | 'flag' | 'alpha2Code'>;
 
   const href = `/country/${neighbor.alpha2Code.toLowerCase()}`;
 </script>

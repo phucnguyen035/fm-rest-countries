@@ -10,24 +10,34 @@
   $: country = data.country;
   $: neighbors = data.neighbors;
 
-  $: imageAlt = `Flag of ${country.name}`;
+  $: imageAlt = data.country.flags.alt || `Flag of ${country.name.common}`;
   $: info = [
     [
-      { label: 'Native name', value: country.nativeName },
+      { label: 'Native name', value: country.name.nativeName?.['eng'].official },
       { label: 'Population', value: formatNumber(country.population) },
       { label: 'Region', value: country.region },
       { label: 'Sub region', value: country.subregion },
       { label: 'Capital', value: country.capital || 'N/A' },
     ],
     [
-      { label: 'Top level domain', value: country.topLevelDomain.join(', ') },
-      { label: 'Currency', value: country.currencies.map((c) => c.name).join(', ') },
-      { label: 'Languages', value: country.languages.map((l) => l.name).join(', ') },
+      { label: 'Top level domain', value: country.tld.join(', ') },
+      {
+        label: 'Currency',
+        value: Object.values(country.currencies)
+          .map((c) => c.name)
+          .join(', '),
+      },
+      {
+        label: 'Languages',
+        value: Object.values(country.languages)
+          .map((l) => l)
+          .join(', '),
+      },
     ],
   ];
 </script>
 
-<Meta title={country.name} />
+<Meta title={country.name.common} />
 
 <div>
   <div class="mb-16">
@@ -40,7 +50,7 @@
   <div class="flex flex-col gap-16 desktop:flex-row desktop:items-center desktop:gap-32">
     <section class="w-full">
       <h2 class="sr-only">{imageAlt}</h2>
-      <img src={country.flag} alt={imageAlt} width="600" />
+      <img src={country.flags.png} alt={imageAlt} width="600" />
     </section>
 
     <div class="w-full">
