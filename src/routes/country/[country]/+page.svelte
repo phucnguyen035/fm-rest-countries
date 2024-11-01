@@ -46,8 +46,10 @@
 
 <div>
   <div class="mb-16">
-    <Button on:click={() => history.back()}>
-      <ArrowLeftIcon slot="icon" />
+    <Button onclick={() => history.back()}>
+      {#snippet icon()}
+        <ArrowLeftIcon />
+      {/snippet}
       Back
     </Button>
   </div>
