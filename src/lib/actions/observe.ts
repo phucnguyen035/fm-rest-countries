@@ -1,4 +1,10 @@
-export const observe = (node: HTMLElement) => {
+import type { Action } from 'svelte/action';
+
+export const observe: Action<
+  HTMLElement,
+  undefined,
+  { onintersecting: (e: CustomEvent) => void }
+> = (node: HTMLElement) => {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
