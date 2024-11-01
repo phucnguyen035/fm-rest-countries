@@ -1,5 +1,16 @@
 import { error } from '@sveltejs/kit';
-import { parse, array, pipe, object, string, number, boolean, optional, mapItems } from 'valibot';
+import {
+  parse,
+  array,
+  pipe,
+  object,
+  string,
+  number,
+  boolean,
+  optional,
+  mapItems,
+  sortItems,
+} from 'valibot';
 
 import { PUBLIC_API_URL } from '$env/static/public';
 import type { Country } from '$lib/schemas';
@@ -52,6 +63,7 @@ const GetCountriesSchema = pipe(
       independent: country.independent ?? false,
     }),
   ),
+  sortItems((a, b) => a.name.localeCompare(b.name)),
 );
 
 export async function load({ url, fetch }) {
