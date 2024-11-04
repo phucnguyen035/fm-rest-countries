@@ -12,7 +12,5 @@
 >
   <img src={neighbor.flag} alt={`Flag of ${neighbor.name}`} class="h-full w-10 object-cover" />
 
-  <div>
-    <span class="truncate">{neighbor.name}</span>
-  </div>
+  <span class="truncate">{neighbor.name}</span>
 </a>
