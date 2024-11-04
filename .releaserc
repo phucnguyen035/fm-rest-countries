@@ -1,5 +1,4 @@
 {
-  "repositoryUrl": "git@github.com:phucnguyen035/fm-rest-countries.git",
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
@@ -26,8 +25,4 @@
     ],
     "@semantic-release/github"
   ],
-  "branches": [
-    "main"
-  ],
-  "dryRun": false
 }
