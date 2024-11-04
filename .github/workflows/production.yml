@@ -1,17 +1,16 @@
 name: Deploy newest release to production
-on:
-  workflow_dispatch:
 
-  workflow_run:
-    workflows: [Run Tests]
-    branches: [main]
-    types:
-      - completed
+on:
+  deployment_status:
 
 jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+    if: github.event.deployment_status.state == 'success'
+
   release:
+    needs: test
     name: Create Release
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -38,6 +37,7 @@ jobs:
         run: pnpx semantic-release
 
   deploy:
+    needs: release
     name: Deploy by merging main branch into release
     runs-on: ubuntu-latest
     steps:
