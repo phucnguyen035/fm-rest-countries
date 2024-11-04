@@ -69,18 +69,18 @@
         {#each info as blocks}
           <div>
             {#each blocks as { label, value }}
-              <div class="leading-loose">
-                <h3 class="inline font-extrabold capitalize">{label}:</h3>
+              <h3 class="leading-loose">
+                <span class="font-extrabold capitalize">{label}:</span>
                 <span>{value}</span>
-              </div>
+              </h3>
             {/each}
           </div>
         {/each}
       </section>
 
       {#if neighbors.length}
-        <section class="mt-16">
-          <h2 class="mb-2 text-xl font-semibold">Border countries:</h2>
+        <section class="mt-16" aria-labelledby="border-countries">
+          <h2 id="border-countries" class="mb-2 text-xl font-semibold">Border countries:</h2>
 
           <ul class="flex flex-wrap gap-3">
             {#each neighbors as neighbor (neighbor.alpha2Code)}
