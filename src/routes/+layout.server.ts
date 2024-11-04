@@ -1,10 +1,8 @@
-import { ThemeEnum } from '$lib/stores/theme';
 import { enum_, optional, parse } from 'valibot';
+import { ThemeEnum } from '$lib/stores/theme';
 
 const ThemeSchema = optional(enum_(ThemeEnum), ThemeEnum.LIGHT);
 
 export function load({ cookies }) {
-  const initialTheme = parse(ThemeSchema, cookies.get('theme'));
-
-  return { theme: initialTheme };
+  return { theme: parse(ThemeSchema, cookies.get('theme')) };
 }
