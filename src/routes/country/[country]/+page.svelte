@@ -1,5 +1,4 @@
 <script lang="ts">
-  import ArrowLeftIcon from '@rgossiaux/svelte-heroicons/solid/ArrowLeft';
   import Button from '$lib/components/Button.svelte';
   import Meta from '$lib/components/Meta.svelte';
   import NeighborPill from '$lib/components/NeighborPill.svelte';
@@ -48,7 +47,19 @@
   <div class="mb-16">
     <Button onclick={() => history.back()}>
       {#snippet icon()}
-        <ArrowLeftIcon />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+          />
+        </svg>
       {/snippet}
       Back
     </Button>
