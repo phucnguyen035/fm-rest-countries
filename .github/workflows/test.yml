@@ -9,27 +9,30 @@ jobs:
     timeout-minutes: 60
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
 
     if: github.event.deployment_status.state == 'success'
 
     steps:
       - name: Checking out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+          version: 9
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node-version }}j
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
       - name: Install Playwright
-        run: npx playwright install --with-deps
+        run: pnpx playwright install --with-deps
       - name: Run Playwright tests
-        run: yarn test
+        run: pnpm test
         env:
           PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}
           PUBLIC_API_URL: ${{ vars.API_URL }}
