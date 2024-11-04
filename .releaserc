@@ -1,5 +1,5 @@
 {
-  "repositoryUrl": "git@github.com:phucnguyen035/frontend-mentor-rest-countries.git",
+  "repositoryUrl": "git@github.com:phucnguyen035/fm-rest-countries.git",
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
