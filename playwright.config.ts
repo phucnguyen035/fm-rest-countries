@@ -1,11 +1,9 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 
-const config: PlaywrightTestConfig = {
+export default {
   webServer: {
-    command: 'npm run build && npm run preview',
+    command: 'pnpm build && pnpm preview',
     port: 4173,
     reuseExistingServer: !process.env.CI,
   },
-};
-
-export default config;
+} satisfies PlaywrightTestConfig;
