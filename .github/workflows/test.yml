@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Install Playwright
-        run: pnpx playwright install --with-deps
+        run: pnpm exec playwright install --with-deps
       - name: Run Playwright tests
         run: pnpm test
         env:
