@@ -1,5 +1,5 @@
 <script>
-  export let title = 'REST countries';
+  let { title = 'REST countries' } = $props();
 </script>
 
 <svelte:head>
