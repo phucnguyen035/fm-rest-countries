@@ -14,6 +14,7 @@ import {
 
 import { PUBLIC_API_URL } from '$env/static/public';
 import type { Country } from '$lib/schemas';
+import type { PageLoad } from './$types';
 
 const getCountriesPath = (type: string | null, query: string | null) => {
   let path = 'all';
@@ -66,17 +67,17 @@ const GetCountriesSchema = pipe(
   sortItems((a, b) => a.name.localeCompare(b.name)),
 );
 
-export async function load({ url, fetch }) {
+export const load: PageLoad = async ({ url, fetch }) => {
   const path = getCountriesPath(url.searchParams.get('type'), url.searchParams.get('q'));
   const fields = Object.keys(GetCountriesSchema.item.entries).join(',');
   const apiUrl = `${PUBLIC_API_URL}/${path}?fields=${fields}`;
 
   const res = await fetch(apiUrl);
   if (!res.ok) {
-    throw error(500, 'Error fetching countries');
+    throw error(res.status, res.statusText);
   }
 
   return {
     countries: parse(GetCountriesSchema, await res.json()),
   };
-}
+};
