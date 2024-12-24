@@ -3,14 +3,15 @@
   import Meta from '$lib/components/Meta.svelte';
   import NeighborPill from '$lib/components/NeighborPill.svelte';
   import { formatNumber } from '$lib/utils/format';
+  import type { PageData } from './$types.js';
 
-  export let data;
+  let { data }: { data: PageData } = $props();
 
-  $: country = data.country;
-  $: neighbors = data.neighbors;
+  let country = $derived(data.country);
+  let neighbors = $derived(data.neighbors);
 
-  $: imageAlt = data.country.flags.alt || `Flag of ${country.name.common}`;
-  $: info = [
+  let imageAlt = $derived(data.country.flags.alt || `Flag of ${country.name.common}`);
+  let info = $derived([
     [
       {
         label: 'Native names',
@@ -38,7 +39,7 @@
           .join(', '),
       },
     ],
-  ];
+  ]);
 </script>
 
 <Meta title={country.name.common} />
