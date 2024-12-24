@@ -74,7 +74,7 @@ export const load: PageLoad = async ({ url, fetch }) => {
 
   const res = await fetch(apiUrl);
   if (!res.ok) {
-    throw error(res.status, res.statusText);
+    error(res.status, res.statusText);
   }
 
   return {

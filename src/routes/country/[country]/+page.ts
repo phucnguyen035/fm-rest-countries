@@ -26,9 +26,9 @@ const getCountry = async (fetch: typeof globalThis.fetch, alpha2Code: string) =>
   const res = await fetch(url);
   if (!res.ok) {
     if (res.status === 404) {
-      throw error(404, 'Country not found');
+      error(404, 'Country not found');
     } else {
-      throw error(500, 'Error fetching country');
+      error(500, 'Error fetching country');
     }
   }
 
@@ -62,7 +62,7 @@ const getBorderingCountries = async (fetch: typeof globalThis.fetch, borders?: s
   const url = `${PUBLIC_API_URL}/alpha/?codes=${codes}&fields=${fields}`;
   const res = await fetch(url);
   if (!res.ok) {
-    throw error(500, 'Error fetching bordering countries');
+    error(500, 'Error fetching bordering countries');
   }
 
   return parse(GetBorderingCountriesSchema, await res.json());
