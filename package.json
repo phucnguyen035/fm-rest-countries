@@ -28,25 +28,25 @@
     "valibot": "^0.42.1"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.2.4",
     "@playwright/test": "^1.48.2",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^11.0.0",
     "@semantic-release/release-notes-generator": "^14.0.1",
-    "@sveltejs/adapter-vercel": "^5.4.6",
+    "@sveltejs/adapter-vercel": "^5.5.2",
     "@sveltejs/kit": "^2.15.0",
-    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@tailwindcss/forms": "^0.5.9",
-    "@types/node": "^22.8.7",
+    "@types/node": "^22.10.2",
     "@types/nprogress": "^0.2.3",
-    "@typescript-eslint/eslint-plugin": "^8.12.2",
-    "@typescript-eslint/parser": "^8.12.2",
     "autoprefixer": "^10.4.16",
     "conventional-changelog-conventionalcommits": "^8.0.0",
-    "eslint": "^9.13.0",
+    "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-svelte": "^2.46.0",
+    "eslint-plugin-svelte": "^2.46.1",
+    "globals": "^15.14.0",
     "postcss": "^8.4.31",
     "postcss-load-config": "^4.0.2",
     "prettier": "^3.3.3",
@@ -59,8 +59,9 @@
     "tailwindcss": "^3.4.14",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.6.3",
+    "typescript-eslint": "^8.18.2",
     "typescript-svelte-plugin": "^0.3.42",
-    "vite": "^5.4.10"
+    "vite": "^6.0.5"
   },
   "type": "module"
 }
