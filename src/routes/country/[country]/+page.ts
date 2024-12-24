@@ -1,8 +1,20 @@
-import { array, description, mapItems, number, object, parse, pipe, record, string } from 'valibot';
+import {
+  array,
+  description,
+  mapItems,
+  number,
+  object,
+  parse,
+  pipe,
+  record,
+  string,
+  type InferOutput,
+} from 'valibot';
 import { error } from '@sveltejs/kit';
 
 import { PUBLIC_API_URL } from '$env/static/public';
 import { Country, CountryNameSchema, FlagsSchema } from '$lib/schemas';
+import type { PageLoad } from './$types';
 
 const GetCountrySchema = object({
   name: CountryNameSchema,
@@ -20,7 +32,10 @@ const GetCountrySchema = object({
   population: number(),
 });
 
-const getCountry = async (fetch: typeof globalThis.fetch, alpha2Code: string) => {
+async function getCountry(
+  fetch: typeof globalThis.fetch,
+  alpha2Code: string,
+): Promise<InferOutput<typeof GetCountrySchema>> {
   const fields = Object.keys(GetCountrySchema.entries).join(',');
   const url = `${PUBLIC_API_URL}/alpha/${alpha2Code}?fields=${fields}`;
   const res = await fetch(url);
@@ -33,7 +48,7 @@ const getCountry = async (fetch: typeof globalThis.fetch, alpha2Code: string) =>
   }
 
   return parse(GetCountrySchema, await res.json());
-};
+}
 
 const GetBorderingCountriesSchema = pipe(
   array(
@@ -52,7 +67,10 @@ const GetBorderingCountriesSchema = pipe(
   ),
 );
 
-const getBorderingCountries = async (fetch: typeof globalThis.fetch, borders?: string[]) => {
+async function getBorderingCountries(
+  fetch: typeof globalThis.fetch,
+  borders?: string[],
+): Promise<InferOutput<typeof GetBorderingCountriesSchema>> {
   if (!borders?.length) {
     return [];
   }
@@ -66,9 +84,9 @@ const getBorderingCountries = async (fetch: typeof globalThis.fetch, borders?: s
   }
 
   return parse(GetBorderingCountriesSchema, await res.json());
-};
+}
 
-export async function load({ params, fetch }) {
+export const load: PageLoad = async ({ params, fetch }) => {
   const country = await getCountry(fetch, params.country);
   const neighbors = await getBorderingCountries(fetch, country.borders);
 
@@ -76,4 +94,4 @@ export async function load({ params, fetch }) {
     country,
     neighbors,
   };
-}
+};
