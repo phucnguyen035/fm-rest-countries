@@ -8,15 +8,9 @@ importers:
 
   .:
     dependencies:
-      '@rgossiaux/svelte-headlessui':
-        specifier: ^1.0.2
-        version: 1.0.2(svelte@5.1.9)
       bits-ui:
-        specifier: 1.0.0-next.35
-        version: 1.0.0-next.35(svelte@5.1.9)
-      classix:
-        specifier: ^2.1.35
-        version: 2.2.0
+        specifier: 1.0.0-next.74
+        version: 1.0.0-next.74(svelte@5.1.9)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -639,11 +633,6 @@ packages:
   '@polka/url@1.0.0-next.28':
     resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==}
 
-  '@rgossiaux/svelte-headlessui@1.0.2':
-    resolution: {integrity: sha512-sauopYTSivhzXe1kAvgawkhyYJcQlK8Li3p0d2OtcCIVprOzdbard5lbqWB4xHDv83zAobt2mR08oizO2poHLQ==}
-    peerDependencies:
-      svelte: ^3.44.0
-
   '@rollup/pluginutils@5.1.4':
     resolution: {integrity: sha512-USm05zrsFxYLPdWWq+K3STlWiT/3ELn3RcV5hJMghpeAIhxfsUIg6mt12CBJBInWMV4VneoV7SfGv8xIwo2qNQ==}
     engines: {node: '>=14.0.0'}
@@ -1025,11 +1014,11 @@ packages:
   bindings@1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
 
-  bits-ui@1.0.0-next.35:
-    resolution: {integrity: sha512-Bm9hPlswA1hbYwn3xmSUsimEp7UlpNcoT7YddshtG7zd/lcZe5I5vr27flRTjYlBOKkjX6V32b+xwHNBOKSvvA==}
+  bits-ui@1.0.0-next.74:
+    resolution: {integrity: sha512-cazru5+NBKBCeK9KCV/OFy5I/B1zxOJGl5WpInzPTEPla5G9qZK9nrnXr6BbExKdhgusTiMm3h4Yvq4E5WHGJA==}
     engines: {node: '>=18', pnpm: '>=8.7.0'}
     peerDependencies:
-      svelte: ^5.0.0-next.1
+      svelte: ^5.0.0
 
   bottleneck@2.19.5:
     resolution: {integrity: sha512-VHiNCbI1lKdl44tGrhNfU3lup0Tj/ZBMJB5/2ZbNXRCPuRCO7ed2mgcK4r17y+KB2EfuYuRaVlwNbAeaWGSpbw==}
@@ -1087,9 +1076,6 @@ packages:
   chownr@3.0.0:
     resolution: {integrity: sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g==}
     engines: {node: '>=18'}
-
-  classix@2.2.0:
-    resolution: {integrity: sha512-RBvlC0wwmDxyPjA+i1e09KuVQEGcJJz/w/bQ1Hxbz2I4NDetFOvrtIBknRhmO2gBUdOrIkMnYZWiGIjdBcNRVA==}
 
   clean-stack@2.2.0:
     resolution: {integrity: sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==}
@@ -2477,8 +2463,8 @@ packages:
   run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
 
-  runed@0.15.3:
-    resolution: {integrity: sha512-HtayB+loDcGdqJDHW8JFdsZzGQMyVzim6+s3052MkjZnwmwDstmF+cusMeTssBe6TCdt5i9D/Tb+KYXN3L0kXA==}
+  runed@0.15.4:
+    resolution: {integrity: sha512-kmbpstUd7v2FdlBM+MT78IyuOVd38tq/e7MHvVb0fnVCsPSPMD/m2Xh+wUhzg9qCJgxRjBbIKu68DlH/x5VXJA==}
     peerDependencies:
       svelte: ^5.0.0-next.1
 
@@ -3368,10 +3354,6 @@ snapshots:
 
   '@polka/url@1.0.0-next.28': {}
 
-  '@rgossiaux/svelte-headlessui@1.0.2(svelte@5.1.9)':
-    dependencies:
-      svelte: 5.1.9
-
   '@rollup/pluginutils@5.1.4(rollup@4.24.3)':
     dependencies:
       '@types/estree': 1.0.6
@@ -3806,13 +3788,13 @@ snapshots:
     dependencies:
       file-uri-to-path: 1.0.0
 
-  bits-ui@1.0.0-next.35(svelte@5.1.9):
+  bits-ui@1.0.0-next.74(svelte@5.1.9):
     dependencies:
       '@floating-ui/core': 1.6.8
       '@floating-ui/dom': 1.6.12
       '@internationalized/date': 3.5.6
-      esm-env: 1.1.4
-      runed: 0.15.3(svelte@5.1.9)
+      esm-env: 1.2.1
+      runed: 0.15.4(svelte@5.1.9)
       svelte: 5.1.9
       svelte-toolbelt: 0.4.6(svelte@5.1.9)
 
@@ -3876,8 +3858,6 @@ snapshots:
       readdirp: 4.0.2
 
   chownr@3.0.0: {}
-
-  classix@2.2.0: {}
 
   clean-stack@2.2.0: {}
 
@@ -5118,9 +5098,9 @@ snapshots:
     dependencies:
       queue-microtask: 1.2.3
 
-  runed@0.15.3(svelte@5.1.9):
+  runed@0.15.4(svelte@5.1.9):
     dependencies:
-      esm-env: 1.1.4
+      esm-env: 1.2.1
       svelte: 5.1.9
 
   sade@1.8.1:
