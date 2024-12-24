@@ -2,7 +2,11 @@
   import type { Country } from '$lib/schemas';
   import { formatNumber } from '$lib/utils/format';
 
-  export let country: Country;
+  type Props = {
+    country: Country;
+  };
+
+  let { country }: Props = $props();
 </script>
 
 <a
