@@ -1,46 +1,45 @@
 <script lang="ts">
   import { browser } from '$app/environment';
   import { goto } from '$app/navigation';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { observe } from '$lib/actions/observe';
   import CountryCard from '$lib/components/CountryCard.svelte';
   import FormInput from '$lib/components/FormInput.svelte';
   import FormSelect from '$lib/components/FormSelect.svelte';
   import Meta from '$lib/components/Meta.svelte';
+  import type { PageData } from './$types';
 
-  export let data;
+  let { data }: { data: PageData } = $props();
 
-  const options = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'].map((c) => ({
+  const CONTINENTS = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'].map((c) => ({
     label: c,
     value: c.toLowerCase(),
   }));
 
-  let size = parseInt($page.url.searchParams.get('size') ?? '20');
-  let currentPage = 1;
+  let size = parseInt(page.url.searchParams.get('size') ?? '20');
+  let currentPage = $state(1);
 
   const handleNextPage = () => {
     if (currentPage >= maxPages) return;
     currentPage++;
   };
 
-  $: countries = data.countries ?? [];
-  $: displayCountries = countries.slice(0, currentPage * size);
-  $: maxPages = Math.ceil(countries.length / size);
-  $: canLoadMore = currentPage < maxPages;
+  let countries = $derived(data.countries ?? []);
+  let displayCountries = $derived(countries.slice(0, currentPage * size));
+  let maxPages = $derived(Math.ceil(countries.length / size));
+  let canLoadMore = $derived(currentPage < maxPages);
 
-  let continent =
-    ($page.url.searchParams.get('type') === 'continent' ? $page.url.searchParams.get('q') : null) ??
-    '';
-  let query =
-    $page.url.searchParams.get('type') === 'name' ? $page.url.searchParams.get('q') : null;
+  let continent = $state(
+    (page.url.searchParams.get('type') === 'continent' ? page.url.searchParams.get('q') : null) ??
+      '',
+  );
+  let query = $state(
+    page.url.searchParams.get('type') === 'name' ? page.url.searchParams.get('q') : null,
+  );
   let timer: number;
   let url = browser ? new URL(location.origin) : null;
 
   function debouncedSearch() {
-    if (!browser) {
-      return;
-    }
-
     clearTimeout(timer);
     timer = window.setTimeout(() => {
       if (url) {
@@ -63,25 +62,29 @@
     }
   }
 
-  $: if (continent !== '') {
-    url?.searchParams.set('type', 'continent');
-    url?.searchParams.set('q', continent);
-    reset('query');
-    debouncedSearch();
-  }
-
-  $: if (query !== null) {
-    if (query) {
-      url?.searchParams.set('type', 'name');
-      url?.searchParams.set('q', query);
-    } else {
-      url?.searchParams.delete('type');
-      url?.searchParams.delete('q');
+  $effect(() => {
+    if (continent !== '') {
+      url?.searchParams.set('type', 'continent');
+      url?.searchParams.set('q', continent);
+      reset('query');
+      debouncedSearch();
     }
+  });
 
-    reset('continent');
-    debouncedSearch();
-  }
+  $effect(() => {
+    if (query !== null) {
+      if (query) {
+        url?.searchParams.set('type', 'name');
+        url?.searchParams.set('q', query);
+      } else {
+        url?.searchParams.delete('type');
+        url?.searchParams.delete('q');
+      }
+
+      reset('continent');
+      debouncedSearch();
+    }
+  });
 </script>
 
 <Meta />
@@ -116,7 +119,7 @@
     <FormSelect
       bind:value={continent}
       class="relative w-full desktop:w-72"
-      items={options}
+      items={CONTINENTS}
       placeholder="Filter by Region"
     />
   </section>
