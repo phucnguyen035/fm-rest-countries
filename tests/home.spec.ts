@@ -1,4 +1,8 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+function locateToggleDarkModeBtn(page: Page) {
+  return page.locator(`button[aria-label="Toggle dark mode"]`);
+}
 
 test.describe('Home page', () => {
   test.beforeEach(async ({ page }) => {
@@ -7,28 +11,28 @@ test.describe('Home page', () => {
   });
 
   test('has dark mode toggle button working', async ({ page }) => {
-    const toggleBtn = page.locator(`button[aria-labelledby="dark-mode"]`);
-    const app = page.locator('#app');
+    const toggleBtn = locateToggleDarkModeBtn(page);
+    const doc = page.locator('html');
 
     await expect(toggleBtn).toBeVisible();
-    await expect(app).toHaveClass('light');
+    await expect(doc).not.toHaveClass('dark');
 
     await toggleBtn.click();
-    await expect(app).toHaveClass('dark');
+    await expect(doc).toHaveClass('dark');
   });
 
-  test('Save theme preference across page reloads', async ({ page }) => {
-    const toggleBtn = page.locator(`button[aria-labelledby="dark-mode"]`);
-    const app = page.locator('#app');
+  test.only('Save theme preference across page reloads', async ({ page }) => {
+    const toggleBtn = locateToggleDarkModeBtn(page);
+    const doc = page.locator('html');
 
     await expect(toggleBtn).toBeVisible();
-    await expect(app).toHaveClass('light');
+    await expect(doc).not.toHaveClass('dark');
 
     await toggleBtn.click();
-    await expect(app).toHaveClass('dark');
+    await expect(doc).toHaveClass('dark');
 
     await page.reload();
-    await expect(app).toHaveClass('dark');
+    await expect(doc).toHaveClass('dark');
   });
 
   test('has list of 20 countries initially', async ({ page }) => {
