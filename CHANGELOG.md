@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/phucnguyen035/fm-rest-countries/compare/v2.3.0...v2.4.0) (2024-12-25)
+
+
+### Features
+
+* rework theme handling ([96475ca](https://github.com/phucnguyen035/fm-rest-countries/commit/96475ca1c5cfafd88d497de33abba73a0699aa11))
+
 # [2.3.0](https://github.com/phucnguyen035/fm-rest-countries/compare/v2.2.0...v2.3.0) (2024-11-04)
 
 
