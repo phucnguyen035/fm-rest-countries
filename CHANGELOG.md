@@ -1,3 +1,16 @@
+# [3.0.0](https://github.com/phucnguyen035/fm-rest-countries/compare/v2.3.0...v3.0.0) (2024-12-25)
+
+
+### Features
+
+* rework theme handling ([ec737d0](https://github.com/phucnguyen035/fm-rest-countries/commit/ec737d0f467641886428127a5b9087b1425f9e84))
+* update vite, prettier, eslint ([6decb83](https://github.com/phucnguyen035/fm-rest-countries/commit/6decb837cc2d3177144b4fe26b5495f7cdc9d2c0))
+
+
+### BREAKING CHANGES
+
+* All dev tooling configs are updated to latest version
+
 # [2.3.0](https://github.com/phucnguyen035/fm-rest-countries/compare/v2.2.0...v2.3.0) (2024-11-04)
 
 
