@@ -1,4 +1,13 @@
-import { object, string, number, optional, boolean, record, type InferOutput } from 'valibot';
+import {
+  object,
+  string,
+  number,
+  optional,
+  boolean,
+  record,
+  picklist,
+  type InferOutput,
+} from 'valibot';
 
 export const CountryNameSchema = object({
   common: string(),
@@ -30,3 +39,6 @@ export const Country = object({
   independent: boolean(),
 });
 export type Country = InferOutput<typeof Country>;
+
+export const Theme = picklist(['light', 'dark']);
+export type Theme = InferOutput<typeof Theme>;

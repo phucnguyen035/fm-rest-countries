@@ -1,8 +1,11 @@
-import { enum_, optional, parse } from 'valibot';
-import { ThemeEnum } from '$lib/stores/theme';
+import { optional, parse } from 'valibot';
+import { Theme } from '$lib/schemas';
+import type { LayoutServerLoad } from './$types';
 
-const ThemeSchema = optional(enum_(ThemeEnum), ThemeEnum.LIGHT);
+const ThemeSchema = optional(Theme);
 
-export function load({ cookies }) {
-  return { theme: parse(ThemeSchema, cookies.get('theme')) };
-}
+export const load: LayoutServerLoad = async ({ cookies }) => {
+  return {
+    theme: parse(ThemeSchema, cookies.get('theme')),
+  };
+};

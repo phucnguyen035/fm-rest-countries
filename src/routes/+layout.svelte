@@ -1,50 +1,59 @@
 <script lang="ts">
-  import NProgress from 'nprogress';
-  import { browser } from '$app/environment';
-  import { navigating } from '$app/stores';
+  import { type Snippet } from 'svelte';
+  // import NProgress from 'nprogress';
+  // import { navigating } from '$app/state';
   import Footer from '$lib/components/Footer.svelte';
   import Header from '$lib/components/Header.svelte';
-  import { theme } from '$lib/stores/theme';
+
   import '../app.postcss';
   import 'nprogress/nprogress.css';
+  import { browser } from '$app/environment';
 
-  export let data;
+  type Props = {
+    children: Snippet;
+  };
 
-  if (data.theme) {
-    $theme = data.theme;
+  let { children }: Props = $props();
+
+  if (browser) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      document.documentElement.classList.toggle('dark', e.matches);
+    });
   }
 
-  if (!data.theme && browser) {
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    $theme = media.matches ? 'dark' : 'light';
-
-    media.onchange = (e) => {
-      if (e.matches) {
-        $theme = 'dark';
-      } else {
-        $theme = 'light';
-      }
-    };
-  }
-
-  NProgress.configure({ minimum: 0.16 });
-  $: {
-    if ($navigating) {
-      NProgress.start();
-    }
-    if (!$navigating) {
-      NProgress.done();
-    }
-  }
+  // NProgress.configure({ minimum: 0.16 });
+  // $effect(() => {
+  //   if (navigating) {
+  //     NProgress.start();
+  //   } else {
+  //     NProgress.done();
+  //   }
+  // });
 </script>
 
-<svelte:head />
+<svelte:head>
+  <script>
+    function getThemeCookie() {
+      return document.cookie
+        .split(';')
+        .find((cookie) => cookie.trim().startsWith('theme='))
+        ?.split('=')[1];
+    }
 
-<div id="app" class={$theme}>
+    const theme = getThemeCookie();
+
+    document.documentElement.classList.toggle(
+      'dark',
+      theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches),
+    );
+  </script>
+</svelte:head>
+
+<div id="app">
   <div class="flex min-h-screen flex-col bg-background text-text transition-colors">
     <Header />
     <main class="container flex-grow">
-      <slot />
+      {@render children()}
     </main>
     <Footer />
   </div>
