@@ -35,7 +35,7 @@
 <header class="mb-8 h-16 shadow-md dark:bg-elements dark:shadow">
   <div class="container flex h-full items-center justify-between">
     <h1 class="font-extrabold desktop:text-2xl">
-      <a href="/">Where in the world?</a>
+      <a href="/">Where in the 🌍?</a>
     </h1>
 
     <button aria-label="Toggle dark mode" class="flex items-center p-2 focus:outline" {onclick}>
